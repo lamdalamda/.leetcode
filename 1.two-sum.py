@@ -6,13 +6,15 @@
 
 # @lc code=start
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        lennums=len(nums)
-        for i in range(0,lennums):
-            for j in range(i+1,lennums):
-                if nums[j]+nums[i] == target:
-                    return ([i,j])
-            
+    def twoSum(self, nums, target: int):
+        hashdict={}
+
+        for i in range(0, len(nums)):
+          
+            if nums[i] in hashdict:
+                return [i,hashdict[nums[i]]]
+            hashdict[target-nums[i]]=i
+   
             
 # @lc code=end
 
