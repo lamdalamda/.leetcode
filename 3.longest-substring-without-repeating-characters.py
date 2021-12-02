@@ -7,19 +7,22 @@
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        reflist=[]
+        
+        #brutal
         lenth=0
-        newlist=[]
-        for i in range(0, len(s)):
-            if s[i] not in newlist:
-                newlist.append(s[i])
-            else:
-                if len(newlist)>len(reflist):
-                    reflist=newlist
+        for i in range(0,len(s)):
+            strlist=[]
+            for j in range(i,len(s)):
 
-                newlist=[]
-                newlist.append(s[i])
-        return max(len(newlist),len(reflist))
+                if s[j] not in strlist:
+                    strlist.append(s[j])
+                else:
+                    break
+            if len(strlist)>lenth:
+                lenth=len(strlist)
+        return lenth        
+        
+        
         
 # @lc code=end
 
