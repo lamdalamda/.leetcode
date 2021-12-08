@@ -22,6 +22,10 @@ class Solution:
         return 2
         
     def threeSum(self, nums: List[int]) -> List[List[int]]:
+
+        return self.threeSum_stupid(nums)
+    
+    def threeSum_stupid(self, nums: List[int]) -> List[List[int]]:
         resultlist=[]
         special=self.special_case(nums)
         if special==1:
@@ -58,7 +62,29 @@ class Solution:
                         negative_combinations[sum].append(negative_nums[j])
                         resultlist.append([-sum,negative_nums[i],negative_nums[j]])
         return resultlist
-            
+    def threeSum_improve1(self, nums: List[int]) -> List[List[int]]:        
+        #还没写好
+        resultlist=[]
+        special=self.special_case(nums)
+        if special==1:
+            return []
+        if special==0:
+            resultlist.append([0,0,0])
+        indexdict={}
+        listlenth=len(nums)
+        for i in range(0,listlenth):
+            indexdict[-i]=[]
+
+        for i in range(0,listlenth):
+            for j in range(i+1,listlenth):
+                sum=nums[i]+nums[j]
+                if sum in indexdict:
+                    if nums[i] not in indexdict[sum]:
+                        indexdict[sum].append(nums[i])
+                        indexdict[sum].append(nums[j])
+                        resultlist.append([-sum,nums[i],nums[j]])
+
+        return resultlist        
                 
         
 # @lc code=end
