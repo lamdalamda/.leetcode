@@ -6,9 +6,19 @@
 
 # @lc code=start
 
-
 class Solution:
-    def searchRange(self, nums: List[int], target: int) -> List[int]:
+    def largest2power(self,len=32):
+        result=0
+        is2power=0
+        while len>1:
+            if len%2==1:
+                is2power=1
+            result+=1
+            len=int(len/2)
+        return (2**(result+is2power))
+            
+    
+    def searchRange(self, nums,target: int):
 
         if len(nums)<10:
             if target in nums:
@@ -19,52 +29,35 @@ class Solution:
                 return [min(templist),max(templist)]
             else:
                 return [-1,-1]
-            
-        index1=0
-        index2=len(nums)-1
-        jump=int(len(nums)/2-0.5)
-        #binary upper limit->index1
-        #binary down limit -> index2
-        if nums[index1]>target or nums[index2]<target:
-            return [-1,-1]
-        index1dict={}
-        index2dict={}
+        lowerindex=0
         
-        smallindex=len(nums)-1
-        largeindex=0
-        if nums[0]!=target: 
-            index1=jump
-            while index1 not in index1dict:
-                index1dict[index1]=nums[index1]
-                jump=int((jump)/2)                         
-                if nums[index1]>target:
-                    index1=index1-jump
-                elif nums[index1]==target:
-                    smallindex=min(smallindex,index1)
-                    index1=index1-jump
-                else:
-                    index1=index1+jump
-
-        jump=int(len(nums)/2-0.5)   
-        if nums[smallindex]!=target:
-            return [-1,-1] 
-        if nums[index2]!=target:
-            index2=jump
-            while index2 not in index2dict: 
-                index2dict[index2]=nums[index2]
-                jump=int((jump+1)/2) 
-                if nums[index2]<target:
-                    index2+=jump
-                elif nums[index1]==target:
-                    largeindex=max(largeindex,index2)
-                    index2=index2+jump
-
-                else:
-                    index2-=jump
-
-        return [smallindex,largeindex]
-            
+        temp=self.largest2power(len(nums))
+        
+        jump=temp
+        if nums[lowerindex]!=target:
+            while jump>1:
+                jump=int(jump/2)
+                if jump+lowerindex<len(nums) and nums[jump+lowerindex]<target:
+                    lowerindex=jump+lowerindex
+            lowerindex=lowerindex+1
+        if nums[lowerindex]!=target:
+            return [-1,-1]
+        
+        upperindex=len(nums)-1
+        
+        temp=self.largest2power(len(nums))        
+        
+        jump=temp
+        if nums[upperindex]!=target:
+            while jump>1:
+                jump=int(jump/2)
+                if upperindex-jump >0 and nums[upperindex-jump]>target:
+                    upperindex=upperindex-jump
+            upperindex=upperindex-1        
+        
+        
+        return [lowerindex,upperindex]
 # @lc code=end
 
 a=Solution()
-a.searchRange([0,0,1,1,1,2,2,3,3,3,4,4,4,4,5,5,6,6,6,8,10,10],4)
+a.searchRange([0,1,2,3,3,4,4,5,5,6,6,7,7,7,9,9,11,11,11,12,12,12,12],12)
