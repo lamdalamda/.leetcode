@@ -17,30 +17,23 @@ class Solution:
             if nums[0]<=nums[1]:
                 return nums
             return [nums[1],nums[0]]
-        index1=0
-        index2=0
-        halfindex=int(len(nums)/2)
-        sorted_subarray1=self.mergesort(nums[0:halfindex])
-        sorted_subarray2=self.mergesort(nums[halfindex:])
-        result=[]
-        while index1<len(sorted_subarray1) or index2<len(sorted_subarray2):
-            if index2 >=len(sorted_subarray2):
-                result.append(sorted_subarray1[index1])
-                index1+=1
+        resultlist = []
+        part1=self.mergesort(nums[0:int(len(nums)/2)])
+        part2=self.mergesort(nums[int(len(nums)/2):])
+        while len(part1)!=0 or len(part2)!=0:
+            if len(part1)==0:
+                resultlist.extend(part2)
+                break
+            if len(part2)==0:
+                resultlist.extend(part1)
+                break
+            if part1[0]<part2[0]:
+                resultlist.append(part1.pop(0))
                 continue
-            if index1 >=len(sorted_subarray1):
-                result.append(sorted_subarray2[index2])
-                index2+=1
-                continue
-            if sorted_subarray1[index1]<=sorted_subarray2[index2]:
-                result.append(sorted_subarray1[index1])
-                index1+=1
-                continue
-            else:
-                result.append(sorted_subarray2[index2])
-                index2+=1
-                continue
-        return result
+            resultlist.append(part2.pop(-1))
+             
+        
+        
     def nextPermutation1(self, nums):
         """
         Do not return anything, modify nums in-place instead.
