@@ -31,7 +31,7 @@ class Solution:
                 resultlist.append(part1.pop(0))
                 continue
             resultlist.append(part2.pop(-1))
-             
+        return resultlist
         
         
     def nextPermutation1(self, nums):
