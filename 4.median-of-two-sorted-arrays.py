@@ -29,11 +29,9 @@ class Solution:
     def findMedianSortedArrays1(self, nums1: List[int], nums2: List[int]) -> float:
         if self.edgecases(nums1,nums2)!=False:
             return self.edgecases(nums1,nums2)
-        # array 1 3 5 7 9 11 13 15
-        # array 2 4 6 8 10 12 14
+
         
-        # length=8,7 
-        # midnum=8
-                
+        
+
 # @lc code=end
 
