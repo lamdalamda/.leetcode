@@ -46,6 +46,16 @@ class mergesort(sort_algorithms):
                 resultlist.append(part2.pop(0))
         return resultlist
     
+class insitu_mergesort(sort_algorithms):
+    def __init__(self,nums):
+        sort_algorithms.__init__(self,nums)
+
+           
+            
+            
+            
+    
+    
 class index_sort(object):
     def index_sort(self,nums):
         hashdict={}
@@ -128,6 +138,9 @@ class ith_order(sort_algorithms):
         sort_algorithms.__init__(self,nums)
         
     def ith_order_random(self,nums):
+        pass
+       
+    def ith_order_deterministic_select_pivot(self,nums):
         pass
        
             
