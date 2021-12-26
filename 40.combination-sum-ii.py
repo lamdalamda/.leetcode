@@ -31,6 +31,7 @@ class Solution:
                 break
                 
             index+=1
+            
             while index<len(candidates) and candidates[index]==candidates[index-1]:
                 index+=1
                 
@@ -44,5 +45,5 @@ class Solution:
 if __name__=="__main__":
     
     a=Solution()
-    print(a.nextuniquecandidate(sorted([10,1,2,7,6,1,5]),1))
+
     a.combinationSum2([10,1,2,7,6,1,5],8)
