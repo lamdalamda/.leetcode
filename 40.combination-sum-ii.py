@@ -12,44 +12,41 @@ class Solution:
     def __init__(self):
         self.hashdict={}
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        results=self.inner(sorted(candidates),target)
-        return results
-    def inner(self, candidates: List[int], target: int) -> List[List[int]]:
-        
-        #sorted candidates:
-        # only return target
-        # results containing path to this target
-        
-        # 1 1 2 5 6 7 8 target =8
+
+        return self.inner(sorted(candidates),target)
+        pass
+    def inner(self, candidates, target: int):
+        index=0
         combinations=[]
-        # 1 2 5 6 7 10 target = 7 results=1
-        for i in range(0,len(candidates)-1):
-            if target>candidates[i]:
-                tmp=self.inner(candidates[i+1:],target-candidates[i])
-                if len(tmp)>0:
-                    for j in tmp:
-                        combinations.append(j+[candidates[i]])
-                    pass 
-
-            if target==candidates[i]:
-                combinations.append([candidates[i]])
-                
-
+        while index<len(candidates):
             
-            if target<candidates[i]:
-                break 
-        if target==candidates[-1]:
-            combinations.append([candidates[-1]])
-
-        return combinations
-     
+            if index==len(candidates)-1:
+                if candidates[index]==target:
+                    combinations.append([candidates[index]])
+                break
+            if target > candidates[index]:
+                tmp=self.inner(candidates[index+1:],target-candidates[index])
+                for j in tmp:
+                    combinations.append(j+[candidates[index]])
+                
+            if candidates[index]==target:
+                combinations.append([candidates[index]])
         
+            if candidates[index]>target:
+                break
+                
+            index+=1
+            while index<len(candidates) and candidates[index]==candidates[index-1]:
+                index+=1
+        return combinations   
+        
+        
+        
+        
+# @lc code=end
+
 if __name__=="__main__":
     
     a=Solution()
+    print(a.nextuniquecandidate(sorted([10,1,2,7,6,1,5]),1))
     a.combinationSum2([10,1,2,7,6,1,5],8)
-            
-        
-                
-# @lc code=end
-
