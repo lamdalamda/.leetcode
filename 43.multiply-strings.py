@@ -27,9 +27,7 @@ class Solution:
         # set len(num2)<len(num1)
         
         if len(num2)>len(num1):
-            temp=num1
-            num1=num2
-            num2=temp
+            num1,num2=(num2,num1)
         
         # 2 * 3
         # i=0 0th digit:=[0]*[0]
