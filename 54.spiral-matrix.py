@@ -4,6 +4,10 @@
 # [54] Spiral Matrix
 #
 from typing import List
+
+# very good practice for list index and range
+
+
 # @lc code=start
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
