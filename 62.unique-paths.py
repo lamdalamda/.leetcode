@@ -13,6 +13,10 @@ class Solution:
         if m>=n:
             return (m,n)
         return (n,m)
+
+    def uniquePaths(self, m: int, n: int):
+        return self.uniquePaths_forward(m,n)
+
     
     def uniquePaths_forward(self, m,n):
         if m<n:
@@ -87,8 +91,7 @@ class Solution:
         
 
     
-    def uniquePaths(self, m: int, n: int):
-        return self.uniquePaths_recursive_hash(m,n)
+
     
     def uniquePaths_recursive(self, m: int, n):
         if m*n==0: 
