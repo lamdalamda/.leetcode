@@ -102,7 +102,14 @@ class Solution:
         return self.uniquePaths_recursive(m-1,n)+self.uniquePaths_recursive(m,n-1)
         # set m>n        
         
+    def jiecheng(self,m):
+        if m==1: return 1
+        if m==0: return 1
+        return m*self.jiecheng(m-1)
+        
 # @lc code=end
 
 a=Solution()
-a.uniquePaths(3,7)
+for i in range(5,10):
+    for j in range(4,i):
+        print(a.uniquePaths(i,j),a.jiecheng(i),a.jiecheng(j),a.jiecheng(i)*a.jiecheng(j))
