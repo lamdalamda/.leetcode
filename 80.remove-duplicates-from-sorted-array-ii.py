@@ -10,30 +10,26 @@ class Solution:
         if len(nums)<3:
             return len(nums)
         #nums>=3
-        checkingindex=1
-        moving_to_index=1
+        #checkingindex=1
+        new_num_comparing_to_index=0
         thisnumber_count=True 
         # 1st appear: unknown->True. secondappear: True->False. 3rd appear:get the false status
-        
-        current_number=nums[0]
+
         for checkingindex in range(1,len(nums)):
-            if nums[checkingindex]==current_number:
+            
+            if nums[checkingindex]==nums[new_num_comparing_to_index]:
                 if thisnumber_count:
                     # this is the 2nd appearance
+                    new_num_comparing_to_index+=1
                     thisnumber_count=False
-                    nums[moving_to_index]=current_number
-                    moving_to_index+=1
-                else:
-                    # means that this is at least 3rd appearance
-                    
-                    pass
-                
+                    nums[new_num_comparing_to_index]=nums[checkingindex]
+
             else:
-                current_number=nums[checkingindex]
                 thisnumber_count=True
-                nums[moving_to_index]=current_number
-                moving_to_index+=1
-        return moving_to_index
+                new_num_comparing_to_index+=1
+                nums[new_num_comparing_to_index]=nums[checkingindex]
+                
+        return new_num_comparing_to_index+1
 
 # @lc code=end
 
