@@ -19,13 +19,14 @@ class Solution:
         self.val_to_index_dict={}
         # key=node.val value=index of the node in "node_of_newgraph"
         self.nodes_of_newgraph=[]
-        
+        self.already_replace=[]
         
     def cloneGraph(self, node: 'Node') -> 'Node':
         if node is None:
             return None
         return self.cloneGraph1(node)
     
+        
     
     def cloneGraph1(self, node: 'Node') -> 'Node':
         # 基本思路：寻找所有的子节点，往self.edges里面塞数据，然后再生成一个新的？
@@ -48,15 +49,23 @@ class Solution:
         if node.neighbors is None:
             return None
         for i in node.neighbors:
+            # 遍历所有的子节点
             self.edges[node.val].append(i.val)
             if i.val not in self.edges:
+                # 说明还没有遍历到
                 self.read_graph_to_edges(i)
-    
+                
     def build_graph_from_edges(self,build_node_val=0):
         if build_node_val not in self.val_to_index_dict:
             # this node is not yet created
-            self.val_to_index_dict[build_node_val]=len(self.nodes_of_newgraph)            
+            
+            self.val_to_index_dict[build_node_val]=len(self.nodes_of_newgraph)   
+            
+            # 在val_to_index_dict中记录，val是build——node——val的node在nodes of new graph的列表中排第几个。第一个添加的肯定是排第零个
+                     
             self.nodes_of_newgraph.append(Node(build_node_val))  
+            
+            # 在列表中添加node对象
             
             if self.edges[build_node_val]==[]:
                 return None
@@ -65,6 +74,7 @@ class Solution:
             
             # initialize neighbor
             self.nodes_of_newgraph[self.val_to_index_dict[build_node_val]].neighbors=[]
+                
                 
             for i in self.edges[build_node_val]:# neighbors
                 if i not in self.val_to_index_dict:
